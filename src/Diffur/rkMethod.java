@@ -2,23 +2,25 @@ package Diffur;
 
 public abstract class rkMethod {
     int h;// размерность
-    double yy[];
+    private  double yy[];
     double y[];
 
-    double k1[];
-    double k2[];
-    double k3[];
-    double k4[];
+   private   double k1[];
+   private double k2[];
+   private double k3[];
+   private double k4[];
 
 
     public double T;
-    public double[] fy;
+    protected double[] fy;
     public rkMethod(int N){
         this.h = N;
         InitArrays(N);
     }
 
-    protected rkMethod() {
+    public rkMethod() {
+        h = 2;
+       InitArrays(h);
     }
 
     private void InitArrays(int N) {
@@ -28,6 +30,7 @@ public abstract class rkMethod {
         k4 = new double[N];
         yy = new double[N];
         y = new double[N];
+        fy = new double[N];
     }
 
     public void SetInit(double y0[],double t0){
@@ -36,7 +39,7 @@ public abstract class rkMethod {
             y[i] = y0[i];
 
     }
-    abstract double[] F(double y[],double t);
+    public  abstract double[] F(double y[],double t);
     public void NextStep(double dt){
         int i;
         k1 = F(y,T);
